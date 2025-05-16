@@ -67,6 +67,14 @@ public class Eleve {
         this.email = email;
     }
 
+    public Classe getClasse() {
+        return classe;
+    }
+
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
+
     @Override
     public String toString() {
         return "Eleve{" +
@@ -79,7 +87,5 @@ public class Eleve {
                 ", classe=" + classe +
                 '}';
     }
-    public  void verifierDisponibilite(){
 
-    }
 }
