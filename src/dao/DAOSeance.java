@@ -8,7 +8,7 @@ import java.util.Vector;
 
 public class DAOSeance{
     Connection cnn= DBUtil.getConnection();
-    public void ajouterSeance(Seance seance){
+    public boolean ajouterSeance(Seance seance){
         try{
             PreparedStatement ps =cnn.prepareStatement("INSERT INTO seance values(?,?,?,?,?,?,?,?,?)");
             ps.setInt(1,seance.getNumeroSalle());
@@ -18,24 +18,26 @@ public class DAOSeance{
             ps.setTime(5,seance.getDebut());
             ps.setTime(6,seance.getFin());
             ps.setDate(7,java.sql.Date.valueOf(seance.getDate()));
-
+            int ligneExcute=ps.executeUpdate();
             ps.close();
-            cnn.close();
+           return ligneExcute>0;
 
         }
-        catch(SQLException e){
+        catch(Exception e){
             System.out.println("EXCEPTION"+e);
+            return false;
         }
     }
-    public void supprimerSeance(String CNE){
+    public boolean supprimerSeance(String CNE){
         try{
             PreparedStatement ps=cnn.prepareStatement("DELETE FROM eleve where CNE like ?");
             ps.setString(1,CNE);
-            ps.executeUpdate();
+            int lignesExcute=ps.executeUpdate();
             ps.close();
-            cnn.close();
+           return lignesExcute>0;
         }catch(SQLException e){
-
+            System.out.println("EXCEPTION"+e);
+        return false;
         }
     }
    /* public  Vector<Seance>  tousSeances(){

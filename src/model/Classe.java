@@ -6,16 +6,19 @@ public class Classe {
 
     private int numeroClasse;
     private int NiveauScolaire;
+    private String nomClasse;
     private boolean free = false;
     List<Eleve>eleves;
     List<Seance>seances;
     List<Absence> HistoriqueListesAbsence;
   private int[][] emploiDuTemps= new int [6][8];
+public Classe(){}
 
-
-    public Classe(int numeroClasse, int niveauScolaire) {
+    public Classe(int numeroClasse, int niveauScolaire,String nomClasse) {
         this.numeroClasse = numeroClasse;
-        NiveauScolaire = niveauScolaire;
+        this.NiveauScolaire = niveauScolaire;
+        this.nomClasse=nomClasse;
+
         eleves = new ArrayList<>();
         seances= new ArrayList<>();
         HistoriqueListesAbsence=new ArrayList<>();
@@ -31,6 +34,14 @@ public class Classe {
 
     public int getNiveauScolaire() {
         return NiveauScolaire;
+    }
+
+    public String getNomClasse() {
+        return nomClasse;
+    }
+
+    public void setNomClasse(String nomClasse) {
+        this.nomClasse = nomClasse;
     }
 
     public void setNiveauScolaire(int niveauScolaire) {

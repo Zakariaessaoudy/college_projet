@@ -12,10 +12,12 @@ public class ClassController {
     public ClassController(){
         daoClasse=new DAOClasse();
     }
-    public void ajouterClasse(Classe classe){
-        daoClasse.ajouterClasse(classe);}
-    public void supprimerClasse(Classe classe){
-        daoClasse.supprimerClass(classe);}
+    public boolean ajouterClasse(Classe classe){
+
+        return  daoClasse.ajouterClasse(classe);
+    }
+    public boolean supprimerClasse(Classe classe){
+        return daoClasse.supprimerClass(classe);}
     public List<Eleve> listeDesElevesDansClasse(){
         return daoClasse.listeDesElevesDansClasse();
     }

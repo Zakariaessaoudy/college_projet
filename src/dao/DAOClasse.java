@@ -16,7 +16,7 @@ public class DAOClasse {
             Statement s = cnn.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM CLASSE;");
             while (rs.next()) {
-                System.out.println("Classe"+rs.getString(1) + " son niveau scolaire" + rs.getString(2));
+                System.out.println("Classe son nom"+rs.getString(3)+"son numero"+rs.getString(1) + " son niveau scolaire" + rs.getString(2));
             }
             rs.close();
             s.close();
@@ -26,28 +26,31 @@ public class DAOClasse {
 
     }
 
-    public void ajouterClasse(Classe classe) {
+    public boolean ajouterClasse(Classe classe) {
         try {
-            PreparedStatement ps = cnn.prepareStatement("INSERT INTO CLASSE VALUES(?,?) ");
+            PreparedStatement ps = cnn.prepareStatement("INSERT INTO CLASSE VALUES(?,?,?) ");
             ps.setInt(1, classe.getNumeroClasse());
             ps.setInt(2, classe.getNiveauScolaire());
-            ps.executeUpdate();
+            ps.setString(3,classe.getNomClasse());
+            int lignesExc=ps.executeUpdate();
             ps.close();
-            cnn.close();
+          return lignesExc>0;
         } catch (Exception e) {
             System.out.println("EXCEPTION"+e);
+                    return false;
         }
     }
 
-    public void supprimerClass(Classe classe) {
+    public boolean supprimerClass(Classe classe) {
         try {
             PreparedStatement ps = cnn.prepareStatement("DELETE FROM CLASSE WHEN NUMEROCLASSE =?");
             ps.setInt(1, classe.getNumeroClasse());
-            ps.executeQuery();
+           int lignesExcute =ps.executeUpdate();
             ps.close();
-            cnn.close();
+          return lignesExcute>0;
         } catch (Exception e) {
             System.out.println("Exception lors de supprission de class "+e);
+            return false;
         }
     }
 
@@ -59,7 +62,7 @@ public class DAOClasse {
             PreparedStatement ps=cnn.prepareStatement("SELECT * FROM classe");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){
-                classe = new Classe(rs.getInt(1),rs.getInt(2));
+                classe = new Classe(rs.getInt(1),rs.getInt(2),rs.getString(3));
                 int numeroClasse=rs.getInt(1);
 
                 PreparedStatement ps2=cnn.prepareStatement("SELECT * FROM eleve where numeroClasse=?");
@@ -90,7 +93,7 @@ public class DAOClasse {
             ResultSet rs =ps.executeQuery();
 
             if (rs.next()){
-                classe=new Classe(rs.getInt(1),rs.getInt(2));
+                classe=new Classe(rs.getInt(1),rs.getInt(2),rs.getString(3));
             }
             rs.close();
             ps.close();
