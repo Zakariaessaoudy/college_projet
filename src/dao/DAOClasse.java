@@ -46,6 +46,7 @@ public class DAOClasse {
             ps.close();
             cnn.close();
         } catch (SQLException e) {
+            System.out.println("Exception lors de supprission de class "+e);
         }
     }
 
@@ -80,15 +81,22 @@ public class DAOClasse {
         }
         return(ListeEleves);
     }
-    public void TrouverClasseParNumero(int numeroClasse) {
+    public Classe TrouverClasseParNumero(int numeroClasse) {
+        Classe classe = null;
         try {
             PreparedStatement ps = cnn.prepareStatement("SELECT * FROM classe where numeroClasse = ?");
             ps.setInt(1, numeroClasse);
-            ps.executeQuery();
-            ps.close();
-            cnn.close();
-        } catch (SQLException e) {
+            ResultSet rs =ps.executeQuery();
 
+            if (rs.next()){
+                classe=new Classe(rs.getInt(1),rs.getInt(2));
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("Exception "+e);
         }
+        return classe;
     }
 }
