@@ -19,6 +19,10 @@ public class Cours {
         this.type = type;
     }
 
+    public Cours() {
+
+    }
+
 
     public int getIdCours(){return idCours ;}
     public void setIdCours(int idCours){ this.idCours= idCours ;}
