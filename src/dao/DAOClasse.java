@@ -16,11 +16,12 @@ public class DAOClasse {
             Statement s = cnn.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM CLASSE;");
             while (rs.next()) {
-                System.out.println(rs.getString(1) + " son niveau scolaire" + rs.getString(2));
+                System.out.println("Classe"+rs.getString(1) + " son niveau scolaire" + rs.getString(2));
             }
-
-        } catch (SQLException e) {
-
+            rs.close();
+            s.close();
+        } catch (Exception e) {
+            System.out.println("EXCEPTION"+e);
         }
 
     }
@@ -33,8 +34,8 @@ public class DAOClasse {
             ps.executeUpdate();
             ps.close();
             cnn.close();
-        } catch (SQLException e) {
-
+        } catch (Exception e) {
+            System.out.println("EXCEPTION"+e);
         }
     }
 
@@ -45,7 +46,7 @@ public class DAOClasse {
             ps.executeQuery();
             ps.close();
             cnn.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Exception lors de supprission de class "+e);
         }
     }
@@ -76,8 +77,8 @@ public class DAOClasse {
 
             ps.close();
             rs.close();
-        }catch(SQLException e){
-
+        }catch(Exception e){
+            System.out.println("EXCEPTION"+e);
         }
         return(ListeEleves);
     }
@@ -94,7 +95,7 @@ public class DAOClasse {
             rs.close();
             ps.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Exception "+e);
         }
         return classe;

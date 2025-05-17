@@ -24,5 +24,7 @@ public class ClassController {
         return classe;
 
     }
-
+    public void AllClass(){
+        daoClasse.AllClass();
+}
 }
