@@ -15,7 +15,7 @@ public class Seance {
     private LocalDate date;
     private Classe classe;
     private int numeroSalle;
-    private String nomCours;
+    private int idCours;
     private Administration administration;
 
 
@@ -108,25 +108,25 @@ public class Seance {
         return elevesAbsents;
     }
 
-    public Seance(String nom_jour, int numero_Semaine, Time debut, Time fin, Classe classe, int numeroSalle, String nomCours, Administration administration, LocalDate date) {
+    public Seance(String nom_jour, int numero_Semaine, Time debut, Time fin, Classe classe, int numeroSalle, int idCours, Administration administration, LocalDate date) {
         this.nom_jour = nom_jour;
         this.numero_Semaine = numero_Semaine;
         this.debut = debut;
         this.fin = fin;
         this.classe = classe;
         this.numeroSalle = numeroSalle;
-        this.nomCours = nomCours;
+        this.idCours= idCours;
         this.administration = administration;
         this.date=date;
 
     }
 
-    public Seance(Time debut, Time fin, Classe classe, int numeroSalle, String nomCours) {
+    public Seance(Time debut, Time fin, Classe classe, int numeroSalle,int idCours) {
         this.debut = debut;
         this.fin = fin;
         this.classe = classe;
         this.numeroSalle = numeroSalle;
-        this.nomCours = nomCours;
+        this.idCours = idCours;
         this.date= LocalDate.now();
     }
 
@@ -162,4 +162,20 @@ public class Seance {
         this.fin = fin;
     }
 
+    public int getNumeroSalle() {
+        return numeroSalle;
+    }
+
+    public void setNumeroSalle(int numeroSalle) {
+        this.numeroSalle = numeroSalle;
+    }
+
+
+    public int getIdCours() {
+        return idCours;
+    }
+
+    public void setIdCours(int idCours) {
+        this.idCours = idCours;
+    }
 }

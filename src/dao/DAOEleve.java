@@ -8,7 +8,7 @@ public class DAOEleve {
     Connection cnn= DBUtil.getConnection();
     public void ajouterEleve(Eleve eleve){
         try{
-            PreparedStatement ps=cnn.prepareStatement("insert into eleve values ?,?,?,?,?,?,?");
+            PreparedStatement ps=cnn.prepareStatement("INSERT INTO eleve VALUES(?,?,?,?,?,?,?)");
             ps.setString(1,eleve.getCne());
             ps.setString(2,eleve.getNom());
             ps.setString(3,eleve.getPrenom());
@@ -21,9 +21,10 @@ public class DAOEleve {
             cnn.close();
 
         }
-    catch(SQLException e){
+        catch(SQLException e){
+            System.out.println("EXCEPTION"+e);
 
-}
+        }
     }
     public void supprimerEleve(String CNE){
         try{
@@ -36,9 +37,9 @@ public class DAOEleve {
 
         }
     }
-public void tousEleves(){
+    public void tousEleves(){
         try{
-           Statement s= cnn.createStatement();
+            Statement s= cnn.createStatement();
             ResultSet rs=s.executeQuery("SELECT * FROM eleve");
             while(rs.next()){
                 System.out.println();
@@ -46,6 +47,6 @@ public void tousEleves(){
         }catch(SQLException e){
 
         }
-}
+    }
 
 }

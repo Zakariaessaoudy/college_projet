@@ -1,4 +1,59 @@
 package dao;
 
-public class DAOSeance {
+import model.Eleve;
+import model.Seance;
+import util.DBUtil;
+import java.sql.*;
+import java.util.Vector;
+
+public class DAOSeance{
+    Connection cnn= DBUtil.getConnection();
+    public void ajouterSeance(Seance seance){
+        try{
+            PreparedStatement ps =cnn.prepareStatement("INSERT INTO seance values(?,?,?,?,?,?,?,?,?)");
+            ps.setInt(1,seance.getNumeroSalle());
+            ps.setInt(2,seance.getIdCours());
+            ps.setString(3,seance.getNom_jour());
+            ps.setInt(4,seance.getNumero_Semaine());
+            ps.setTime(5,seance.getDebut());
+            ps.setTime(6,seance.getFin());
+            ps.setDate(7,java.sql.Date.valueOf(seance.getDate()));
+
+            ps.close();
+            cnn.close();
+
+        }
+        catch(SQLException e){
+            System.out.println("EXCEPTION"+e);
+        }
+    }
+    public void supprimerSeance(String CNE){
+        try{
+            PreparedStatement ps=cnn.prepareStatement("DELETE FROM eleve where CNE like ?");
+            ps.setString(1,CNE);
+            ps.executeUpdate();
+            ps.close();
+            cnn.close();
+        }catch(SQLException e){
+
+        }
+    }
+   /* public  Vector<Seance>  tousSeances(){
+        Vector<Seance> TousSeances=new Vector<Seance>();
+        try{
+            Statement s= cnn.createStatement();
+            ResultSet rs=s.executeQuery("SELECT * FROM seance");
+            while(rs.next()){
+            Seance seance = new Seance();
+            seance.getNumeroSalle(rs.getInt("numeroSalle"));
+            seance.getIdCours(rs.getInt("idCours"));
+
+
+
+            }
+        }catch(SQLException e){
+
+        }
+    }*/
+
 }

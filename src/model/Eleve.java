@@ -8,7 +8,7 @@ public class Eleve {
     private String emailParent;
     private String email;
     private Classe classe;
-
+    public Eleve(){}
     public Eleve(String cne, String nom, String prenom, String adresse, String emailParent, String email,Classe classe) {
         this.cne = cne;
         this.nom = nom;

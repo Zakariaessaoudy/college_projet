@@ -25,7 +25,7 @@ public class DAOClasse {
 
     }
 
-    public void ajouterClass(Classe classe) {
+    public void ajouterClasse(Classe classe) {
         try {
             PreparedStatement ps = cnn.prepareStatement("INSERT INTO CLASSE VALUES(?,?) ");
             ps.setInt(1, classe.getNumeroClasse());
@@ -49,35 +49,46 @@ public class DAOClasse {
         }
     }
 
-public List<Eleve> listeDesElevesDansClasse(){
-    List <Eleve> ListeEleves = new ArrayList<>() {};
+    public List<Eleve> listeDesElevesDansClasse(){
+        List <Eleve> ListeEleves = new ArrayList<>();
         try{
             Classe classe =null;
             Eleve eleve=null;
-        PreparedStatement ps=cnn.prepareStatement("SELECT * FROM classe");
-        ResultSet rs=ps.executeQuery();
-        while(rs.next()){
-            classe = new Classe(rs.getInt(1),rs.getInt(2));
-            int numeroClasse=rs.getInt(1);
+            PreparedStatement ps=cnn.prepareStatement("SELECT * FROM classe");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                classe = new Classe(rs.getInt(1),rs.getInt(2));
+                int numeroClasse=rs.getInt(1);
 
-            PreparedStatement ps2=cnn.prepareStatement("SELECT * FROM eleve where numeroClasse=?");
-            ps2.setInt(1,numeroClasse);
-            ResultSet rs2=ps2.executeQuery();
-            while(rs2.next()){
-                eleve=new Eleve(rs2.getString(1),rs2.getString(2),rs2.getString(3),
-                        rs2.getString(4),rs2.getString(5),rs2.getString(6),classe);
-                ListeEleves.add(eleve);
+                PreparedStatement ps2=cnn.prepareStatement("SELECT * FROM eleve where numeroClasse=?");
+                ps2.setInt(1,numeroClasse);
+                ResultSet rs2=ps2.executeQuery();
+                while(rs2.next()){
+                    eleve=new Eleve(rs2.getString(1),rs2.getString(2),rs2.getString(3),
+                            rs2.getString(4),rs2.getString(5),rs2.getString(6),classe);
+                    ListeEleves.add(eleve);
+                }
+                rs2.close();
+                ps2.close();
             }
-            rs2.close();
-            ps2.close();
+
+
+            ps.close();
+            rs.close();
+        }catch(SQLException e){
+
         }
-
-
-        ps.close();
-        rs.close();
-    }catch(SQLException e){
-
-}
         return(ListeEleves);
-}
+    }
+    public void TrouverClasseParNumero(int numeroClasse) {
+        try {
+            PreparedStatement ps = cnn.prepareStatement("SELECT * FROM classe where numeroClasse = ?");
+            ps.setInt(1, numeroClasse);
+            ps.executeQuery();
+            ps.close();
+            cnn.close();
+        } catch (SQLException e) {
+
+        }
+    }
 }
