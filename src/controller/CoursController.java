@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CoursController {
 
-   /* private DAOCours daoCours;
+   private DAOCours daoCours;
 
     public CoursController() {
         daoCours = new DAOCours();
@@ -43,4 +43,4 @@ public class CoursController {
         return daoCours.avoirCoursParIdEnseignant(idEnseignant);
     }
 
-*/}
+}
