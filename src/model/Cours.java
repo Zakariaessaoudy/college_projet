@@ -1,16 +1,27 @@
 package model;
 
 public class Cours {
-
+    private int idCours ;
     private String nom ;
     private String type ;
     private Enseignant enseignant ;
 
-    public Cours(String nom, String type , Enseignant enseignant) {
+    public Cours(int idCours , String nom, String type , Enseignant enseignant) {
+        this.idCours= idCours ;
         this.nom = nom;
         this.type = type;
         this.enseignant = enseignant ;
     }
+
+    public Cours(int idCours , String nom, String type ) {
+        this.idCours= idCours ;
+        this.nom = nom;
+        this.type = type;
+    }
+
+
+    public int getIdCours(){return idCours ;}
+    public void setIdCours(int idCours){ this.idCours= idCours ;}
     public String getNom() {
         return nom;
     }
@@ -32,7 +43,7 @@ public class Cours {
 
     public String getDescription() {
         if (enseignant != null) {
-            return "Cours de " + nom + " (" + type + ") assuré par "
+            return "Cours identifié par " +idCours +" de " + nom + " (" + type + ") assuré par "
                     + enseignant.getPrenom() + " " + enseignant.getNom() + ".";
         } else {
             return "Cours de " + nom + " (" + type + ") sans enseignant affecté.";

@@ -6,7 +6,7 @@ import java.util.List;
 public class Enseignant {
     private String nom ;
     private String prenom ;
-    private String identifiant ;
+    private int identifiant ;
     private String email ;
     private String numeroTelephone ;
     private List<Cours> cours ;
@@ -25,10 +25,10 @@ public class Enseignant {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-    public String getIdentifiant() {
+    public int getIdentifiant() {
         return identifiant;
     }
-    public void setIdentifiant(String identifiant) {
+    public void setIdentifiant(int identifiant) {
         this.identifiant = identifiant;
     }
     public String getEmail() {
@@ -44,7 +44,7 @@ public class Enseignant {
         this.numeroTelephone = numeroTelephone;
     }
 
-    public Enseignant(String nom, String prenom, String identifiant, String email,
+    public Enseignant(int identifiant , String nom, String prenom, String email,
                       String numeroTelephone) {
         this.nom = nom;
         this.prenom = prenom;
