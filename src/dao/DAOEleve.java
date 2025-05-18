@@ -48,7 +48,7 @@ return false;
             ResultSet rs=s.executeQuery("SELECT * FROM eleve");
             while(rs.next()){
                 Classe classe=new Classe();
-                classe.setNumeroClasse(rs.getInt(1));
+                classe.setNumeroClasse(rs.getInt(7));
             Eleve eleve=new Eleve(rs.getString(1),rs.getString(2),
                     rs.getString(3),rs.getString(4)
                     ,rs.getString(5),rs.getString(6),classe);
@@ -62,7 +62,7 @@ return false;
     public Eleve trouveEleveParCNE(String CNE){
         Eleve eleve=null;
         try{
-            PreparedStatement ps=cnn.prepareStatement("SELECT * FROM eleve WHERE CNE = ?");
+            PreparedStatement ps=cnn.prepareStatement("SELECT * FROM eleves WHERE CNE = ?");
             ps.setString(1,CNE);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){

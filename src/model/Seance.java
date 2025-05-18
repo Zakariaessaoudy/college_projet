@@ -4,6 +4,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ public class Seance {
     private int numeroSalle;
     private int idCours;
     private Administration administration;
+
 
 
     public int[] getOrdreSeances() {
@@ -120,7 +122,18 @@ public class Seance {
         this.date=date;
 
     }
+public Seance(int numeroSalle, int idCours, String nom_jour, int numero_Semaine, Time debut , Time fin,LocalDate date , Administration administration ,Classe classe){
+        this.numeroSalle=numeroSalle;
+        this.idCours=idCours;
+        this.nom_jour=nom_jour;
+        this.numero_Semaine=numero_Semaine;
+        this.debut=debut;
+        this.fin=fin;
+        this.date=date;
+        this.administration=administration;
+        this.classe=classe;
 
+}
     public Seance(Time debut, Time fin, Classe classe, int numeroSalle,int idCours) {
         this.debut = debut;
         this.fin = fin;
@@ -169,13 +182,26 @@ public class Seance {
     public void setNumeroSalle(int numeroSalle) {
         this.numeroSalle = numeroSalle;
     }
-
-
     public int getIdCours() {
         return idCours;
     }
-
     public void setIdCours(int idCours) {
         this.idCours = idCours;
+    }
+
+    public Classe getClasse() {
+        return classe;
+    }
+
+    public void setClasse(Classe classe) {
+        this.classe = classe;
+    }
+
+    public Administration getAdministration() {
+        return administration;
+    }
+
+    public void setAdministration(Administration administration) {
+        this.administration = administration;
     }
 }
