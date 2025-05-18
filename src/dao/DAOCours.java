@@ -23,9 +23,9 @@ public class DAOCours {
             sql1.setString(1, cours.getNom());
             sql1.setString(2, cours.getType());
             sql1.setInt(3, cours.getEnseignant().getIdentifiant());
-            int updatedLignes = sql1.executeUpdate();
+            int addedLignes = sql1.executeUpdate();
             sql1.close();
-            return updatedLignes > 0 ;
+            return addedLignes > 0 ;
 
         } catch (Exception e) {
             System.out.println("EXCEPTION"+e);
@@ -122,9 +122,7 @@ public class DAOCours {
 
     public boolean coursExiste(String nomCours) {
         try {
-            PreparedStatement ps = conn.prepareStatement(
-                    "SELECT 1 FROM cours WHERE nomCours = ?"
-            );
+            PreparedStatement ps = conn.prepareStatement("SELECT 1 FROM cours WHERE nomCours = ?");
             ps.setString(1, nomCours);
 
             ResultSet rs = ps.executeQuery();
@@ -146,34 +144,17 @@ public class DAOCours {
 
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT idCours, nomCours, typeCours FROM cours WHERE idEnseignant = ?"
-            );
+                    "SELECT idCours, nomCours, typeCours FROM cours WHERE idEnseignant = ?");
             ps.setInt(1, idEnseignant);
-
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
-                // Récupération des champs du cours
-                int idCours = rs.getInt("idCours");
-                String nomCours = rs.getString("nomCours");
-                String typeCours = rs.getString("typeCours");
-
-                // Création de l'objet Cours
-                Cours c = new Cours(idCours, nomCours ,typeCours);
-                listeCours.add(c);
+                listeCours.add(new Cours(rs.getInt("idCour"),rs.getString("nomCours"),rs.getString("typeCours")));
             }
-
             rs.close();
             ps.close();
-
         } catch (SQLException e) {
             System.out.println("EXCEPTION : " + e.getMessage());
         }
-
         return listeCours;
     }
-
-
-
-
 }
